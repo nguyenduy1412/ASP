@@ -1,0 +1,137 @@
+﻿@model  List<WebApplication3.Models.Product>
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .hover {
+            display: none;
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 200px;
+            height: 400px;
+        }
+
+        .card {
+            overflow: hidden;
+        }
+
+        .product:hover .hover {
+            display: block;
+        }
+
+        .btnshop {
+            background-color: rgb(250, 107, 107);
+            color: white;
+            padding: 5px;
+            border-radius: 10px;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+        .color-star {
+            color: rgb(255,132,24);
+        }
+        .sale {
+            margin-top: 10px;
+            position: absolute;
+            color: white;
+            background-color: rgb(255,132,24);
+            padding-right: 15px;
+            padding-left: 10px;
+            border-end-end-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center p-2">
+
+            <button class="btn btn-danger font-weight-bold ml-3">LASTEST</button>
+            <button class="btn  font-weight-bold ml-3"> @Html.ActionLink("FEATURED", "Create")</button>
+            <button class="btn  font-weight-bold ml-3">SPECIAL</button>
+        </div>
+        <div class="row">
+            @{
+                for (int i = 0; i<Model.Count; i++)
+                {
+                    <div class="col-lg-2 product">
+                                    <div class="card">
+                                        <img class="card-img-top" src="@Model[i].Image"
+                                             alt="Card image cap">
+                                        <div class="card-body">
+                                            <p class="card-text">@Model[i].Name</p>
+                                            
+                                            <div class="d-flex">
+                                                <h6 class="card-title mr-2">$ @Model[i].PriceSale</h6>
+                                                @{
+                                                    if (Model[i].Sale !=0)
+                                                    {
+                                                        <h6 class="card-title text-danger"> <del>$ @Model[i].Price</del> </h6>
+                                                    }
+                                                }
+                                                
+                                            </div>
+                                            @{
+                                                for (int j = 0; j<5; j++)
+                                                {
+                                                    if (j<Model[i].Star)
+                                                    {
+                                                        <span><i class="fa-solid fa-star color-star"></i></span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span><i class="fa-solid fa-star"></i></span>
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                        <div class="hover">
+                                            <a href="#" class="btnshop btn">SOLD OUT</a>
+                                        </div>
+                                        @{
+                                            if (Model[i].Sale !=0)
+                                            {
+                                                <div class="sale">
+                                                    <span>SALE</span>
+                                                </div>
+                                            }
+                                        }
+
+                                    </div>
+                    </div>
+
+                    }
+                }
+
+            </div>
+    </div>
+  
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
+
